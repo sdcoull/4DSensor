@@ -39,5 +39,8 @@
     <Compile Include="GratingPrinter.cs" />
     <Compile Include="NoiseReducer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Question 2-3.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
