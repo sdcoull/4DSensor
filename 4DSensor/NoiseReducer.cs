@@ -18,7 +18,7 @@ class NoiseReducer
 		var newImage = new Bitmap(width, height);
 		using (Graphics graphics = Graphics.FromImage(newImage))
 		{
-			graphics.DrawImage(originalImage, new Point(0,0));
+			graphics.DrawImage(originalImage, 0, 0, width, height);
 
 			//Iterates through the image and stores each pixel's brightness in a 2D array.
 			double[][] brightness = new double[height][];
@@ -46,8 +46,8 @@ class NoiseReducer
 			}
 		}
 
-		string name = "output.bmp";
-		if (advanced) name = "output - advanced.bmp";
+		string name = "output - q3.bmp";
+		if (advanced) name = "output - q4.bmp";
 
 		newImage.Save(name);
 	}
