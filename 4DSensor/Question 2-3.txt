@@ -1,7 +1,0 @@
-﻿I think the pros of my noise removal solutions are their speed. By iterating over the image once to make a 2D array of the brightness 
-of each pixel, then analysing pixels with the array, the amount of times getPixel() is called on the image is reduced. If I had instead
-just called getPixel on each of the surrounding 4 or 9 pixels for every pixel, the amount of calls would have been 4 or 9-fold
-respectively. With my current test image, a 58MB file, this solution can run the simple and advanced algorithms in less than 3
-seconds each with my Macbook Pro.
-One con of this solution is that there is no 'knock on effect'. If a pixel is changed at (x,y), this would effect analysis on (x+1,y),
-since all analysis is made on the original image.

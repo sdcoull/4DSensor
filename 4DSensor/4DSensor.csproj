@@ -40,7 +40,10 @@
     <Compile Include="NoiseReducer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Question 2-3.txt" />
+    <None Include="Final Solution\Question 2-3.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Final Solution\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
