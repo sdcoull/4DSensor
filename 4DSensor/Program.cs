@@ -15,12 +15,13 @@ namespace DSensor
 
 			Bitmap b = new Bitmap("test.bmp");
 			NoiseReducer n = new NoiseReducer(b);
-			Bitmap newImage = n.Fix();
+			Bitmap newImage = n.Fix(false);
 			newImage.Save("output.bmp");
+
+			Bitmap newImage2 = n.Fix(true);
+			newImage2.Save("outputadv.bmp");
 
 			Console.WriteLine("Done!");
 		}
-
-
 	}
 }
