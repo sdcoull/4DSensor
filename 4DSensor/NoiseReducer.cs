@@ -3,49 +3,53 @@ using System.Drawing;
 
 class NoiseReducer
 {
-	private Bitmap originalImage;
+	private readonly Bitmap originalImage;
 
 	public NoiseReducer(Bitmap b)
 	{
 		originalImage = b;
 	}
 
-	public Bitmap Fix(bool advanced)
+	public void Fix(bool advanced)
 	{
 		int width = originalImage.Width;
 		int height = originalImage.Height;
 
-		Bitmap newImage = new Bitmap(width, height);
+		var newImage = new Bitmap(width, height);
 		using (Graphics graphics = Graphics.FromImage(newImage))
 		{
-			graphics.DrawImage(originalImage, 0, 0);
+			graphics.DrawImage(originalImage, new Point(0,0));
 
-			double[][] colors = new double[height][];
-
+			//Iterates through the image and stores each pixel's brightness in a 2D array.
+			double[][] brightness = new double[height][];
 			for (int y = 0; y < height; y++)
 			{
-				colors[y] = new double[width];
+				brightness[y] = new double[width];
 				for (int x = 0; x < width; x++)
 				{
-					Color c = originalImage.GetPixel(x, y);
-					double brightness = (c.G + c.B + c.R) / 3;
-					colors[y][x] = brightness;
+					Color color = originalImage.GetPixel(x, y);
+					double pixelBrightness = (color.G + color.B + color.R) / 3;
+					brightness[y][x] = pixelBrightness;
 				}
 			}
 
+			//Iterates through 2D brightness array adjusting pixels when necessary. 
 			for (int y = 1; y < height - 1; y++)
 			{
 				for (int x = 1; x < width - 1; x++)
 				{
 					if (advanced)
-						ChangeBrightnessAdvanced(graphics, colors, y, x);
+						ChangeBrightnessAdvanced(graphics, brightness, y, x);
 					else
-						ChangeBrightness(graphics, colors, y, x);
+						ChangeBrightness(graphics, brightness, y, x);
 				}
 			}
 		}
 
-		return newImage;
+		string name = "output.bmp";
+		if (advanced) name = "output - advanced.bmp";
+
+		newImage.Save(name);
 	}
 
 	void ChangeBrightness(Graphics graphics, double[][] colors, int y, int x)
@@ -80,20 +84,22 @@ class NoiseReducer
 
 		if (Math.Abs(currentBrightness - surroundingBrightness) > 10)
 		{
-			double[] brightness = new double[] {colors[y-1][x-1] , colors[y-1][x] , colors[y-1][x+1] ,
+			double[] brightness = {colors[y-1][x-1] , colors[y-1][x] , colors[y-1][x+1] ,
 										colors[y][x-1] , colors[y][x] , colors[y][x+1] ,
 										   colors[y+1][x-1] , colors[y+1][x] , colors[y+1][x+1]};
-			Tuple<int, int>[] positions = new Tuple<int, int>[] {
+			Tuple<int, int>[] positions = {
 				Tuple.Create(x-1, y-1),Tuple.Create(x, y - 1), Tuple.Create(x+1, y - 1),
 				     Tuple.Create(x-1, y),Tuple.Create(x, y),Tuple.Create(x+1, y),
 				     Tuple.Create(x-1, y+1),Tuple.Create(x, y+1),Tuple.Create(x+1, y+1)};
 
+			//In order to find out the 5th brightest color, a list of each surrounding pixel's brightness and corresponding x,y coordinates are put into arrays and sorted.
 			Color newColor = FifthBrightness(brightness, positions);
 
 			graphics.FillRectangle(new SolidBrush(newColor), x, y, 1, 1);
 		}
 	}
 
+	//Since we will only ever sort 9 values, using an Insert Sort which is effective with small data sets.
 	Color FifthBrightness(double[] brightness, Tuple<int, int>[] positions)
 	{
 		double tempBrightness;

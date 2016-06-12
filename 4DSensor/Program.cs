@@ -7,21 +7,66 @@ namespace DSensor
 	{
 		public static void Main(string[] args)
 		{
-			GratingPrinter g = new GratingPrinter();
-			g.OneDimensionalPrinter();
-			g.TwoDimensionalPrinter();
+			var g = new GratingPrinter();
+			//Q1
+			try
+			{
+				Console.WriteLine("Printing one dimensional image...");
+				g.OneDimensionalPrinter();
+				Console.WriteLine("Finished!");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error printing one dimensional printer.");
+				Console.WriteLine(e.Message);
+				return;
+			}
 
-			Console.WriteLine("Fixing image...");
+			//Q2
+			try
+			{
+				Console.WriteLine("Printing two dimensional image...");
+				g.TwoDimensionalPrinter();
+				Console.WriteLine("Finished!");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error printing two dimensional printer.");
+				Console.WriteLine(e.Message);
+				return;
+			}
 
-			Bitmap b = new Bitmap("test.bmp");
-			NoiseReducer n = new NoiseReducer(b);
-			Bitmap newImage = n.Fix(false);
-			newImage.Save("output.bmp");
+			//Q3
+			try
+			{
+				Console.WriteLine("Removing test.bmp noise with simple algorithm...");
+				var testImage = new Bitmap("test.bmp");
+				var noiseReducer = new NoiseReducer(testImage);
+				noiseReducer.Fix(false);
+				Console.WriteLine("Finished!");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error with simple noise removal.");
+				Console.WriteLine(e.Message);
+				return;
+			}
 
-			Bitmap newImage2 = n.Fix(true);
-			newImage2.Save("outputadv.bmp");
-
-			Console.WriteLine("Done!");
+			//Q4
+			try
+			{
+				Console.WriteLine("Removing test.bmp noise with advanced algorithm....");
+				var testImage = new Bitmap("test.bmp");
+				var noiseReducer = new NoiseReducer(testImage);
+				noiseReducer.Fix(true);
+				Console.WriteLine("Finished!");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error with advanced noise removal.");
+				Console.WriteLine(e.Message);
+				return;
+			}
 		}
 	}
 }

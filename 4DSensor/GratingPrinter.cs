@@ -7,8 +7,6 @@ namespace DSensor
 	{
 		public void OneDimensionalPrinter()
 		{
-			Console.WriteLine("Drawing 1D grating image...");
-
 			int width = 3800; //roughly 10cm in pixels, assuming the dpi is 96
 			int height = 3800;
 
@@ -26,14 +24,10 @@ namespace DSensor
 
 				output.Save("output - q1.bmp");
 			}
-
-			Console.WriteLine("1D grating image - done!");
 		}
 
 		public void TwoDimensionalPrinter()
 		{
-			Console.WriteLine("Drawing 2D grating image...");
-
 			int width = 3800;
 			int height = 3800;
 
@@ -63,7 +57,6 @@ namespace DSensor
 
 				output.Save("output - q2.bmp");
 			}
-			Console.WriteLine("2D grating image - done!");
 		}
 
 		private int MmToPixels(double mm, double dpi)
