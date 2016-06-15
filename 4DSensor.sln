@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4DSensor", "4DSensor\4DSensor.csproj", "{31FFF3B0-684B-4F3A-B3D7-268A7055FFAA}"
 EndProject
 Global
@@ -11,7 +11,10 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{31FFF3B0-684B-4F3A-B3D7-268A7055FFAA}.Debug|x86.ActiveCfg = Debug|x86
 		{31FFF3B0-684B-4F3A-B3D7-268A7055FFAA}.Debug|x86.Build.0 = Debug|x86
-		{31FFF3B0-684B-4F3A-B3D7-268A7055FFAA}.Release|x86.ActiveCfg = Release|x86
-		{31FFF3B0-684B-4F3A-B3D7-268A7055FFAA}.Release|x86.Build.0 = Release|x86
+		{31FFF3B0-684B-4F3A-B3D7-268A7055FFAA}.Release|x86.ActiveCfg = Debug|x86
+		{31FFF3B0-684B-4F3A-B3D7-268A7055FFAA}.Release|x86.Build.0 = Debug|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
